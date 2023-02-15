@@ -1,0 +1,4 @@
+[submodule "mongo"]
+	path = mongo
+	url = /home/ubuntu/GIT/mongodb-without-avx/mongo
+	branch = master
