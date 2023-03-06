@@ -23,7 +23,8 @@ RUN patch -p0 < /no_avx_patch.diff
 
 ARG NUM_JOBS=
 
-RUN python3 -m pip install requirements_parser && \
+RUN export GIT_PYTHON_REFRESH=quiet && \
+    python3 -m pip install requirements_parser && \
     python3 -m pip install -r etc/pip/compile-requirements.txt && \
     if [ "${NUM_JOBS}" -gt 0 ]; then export JOBS_ARG="-j ${NUM_JOBS}"; fi && \
     python3 buildscripts/scons.py install-servers MONGO_VERSION="${MONGO_VERSION}" --release --disable-warnings-as-errors ${JOBS_ARG} && \
