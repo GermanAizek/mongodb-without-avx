@@ -35,8 +35,20 @@ Patching
 ```
 git clone --recurse-submodules https://github.com/GermanAizek/mongodb-without-avx.git
 cd mongo
-patch -p1 SConstruct < ../no_avx_patch.diff
 ```
+
+Now you need to choose a patch for your requirements.
+
+ - o2_patch.diff - default optimization
+ - o3_patch.diff - maximum optimization (big binary file)
+ - os_patch.diff - size binary optimization
+
+Example:
+
+```
+patch -p1 SConstruct < ../o3_patch.diff
+```
+
 Done! Now we perform default building that you need.
 
 SCons
@@ -54,7 +66,7 @@ errors. To ignore the warnings, pass the switch
 
     $ python3 buildscripts/scons.py install-mongod --disable-warnings-as-errors
 
-***Note***: On memory-constrained systems, you may run into an error such as `g++: fatal error: Killed signal terminated program cc1plus`. To use less memory during building, pass the parameter `-j1` to scons. This can be incremented to `-j2`, `-j3`, and higher as appropriate to find the fastest working option on your system.
+***Note***: On memory-constrained systems, you may run into an error such as `g++: fatal error: Killed signal terminated program cc1plus`. To use less memory during building, pass the parameter `-j1` to scons. This can be incremented to `-j4`, `-j8`, and higher as appropriate to find the fastest working option on your system. `-j` it's count CPU threads (if CPU does not have multithreading, then its number cores)
 
     $ python3 buildscripts/scons.py install-mongod -j1
 
