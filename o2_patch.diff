@@ -1,0 +1,43 @@
+From ebc708a1e635a67e0da7f686ea97bffd040b770a Mon Sep 17 00:00:00 2001
+From: German Semenov <GermanAizek@yandex.ru>
+Date: Fri, 2 Jun 2023 02:03:21 +0300
+Subject: [PATCH] Optimize compile time and remove avx instructions
+
+---
+ SConstruct | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index b65e089f8ee..74811ccc25c 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -312,7 +312,7 @@ add_option(
+     'dbg',
+     choices=['on', 'off'],
+     const='on',
+-    default=build_profile.dbg,
++    default='off',
+     help='Enable runtime debugging checks',
+     nargs='?',
+     type='choice',
+@@ -349,7 +349,7 @@ add_option(
+     'opt',
+     choices=['on', 'debug', 'size', 'off', 'auto'],
+     const='on',
+-    default=build_profile.opt,
++    default='on',
+     help='Enable compile-time optimization',
+     nargs='?',
+     type='choice',
+@@ -375,7 +375,7 @@ add_option(
+     action="append",
+     choices=experimental_optimization_choices,
+     const=experimental_optimization_choices[0],
+-    default=['+sandybridge'],
++    default=[],
+     help='Enable experimental optimizations',
+     nargs='?',
+     type='choice',
+-- 
+2.34.1
+
