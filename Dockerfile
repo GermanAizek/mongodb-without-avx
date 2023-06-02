@@ -18,8 +18,8 @@ RUN mkdir /src && \
 
 WORKDIR /src
 
-COPY ./no_avx_patch.diff /no_avx_patch.diff
-RUN patch -p0 < /no_avx_patch.diff
+COPY ./o2_patch.diff /o2_patch.diff
+RUN patch -p1 < /o2_patch.diff
 
 ARG NUM_JOBS=
 
