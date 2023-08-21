@@ -14,13 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        - include:
-            mongo_version: 6.0.2
+        include:
+          - mongo_version: 6.0.2
             platforms: |-
               linux/amd64
-
-        - include:
-            mongo_version: 5.0.20
+          - mongo_version: 5.0.20
             platforms: |-
               linux/amd64
               linux/arm64
@@ -37,11 +35,10 @@ jobs:
     - name: Login to Docker registry
       uses: docker/login-action@v2.2.0
       with:
-        registry: ${{ env.ORG_NAME }}
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-    - name: Build and push ${{ matrix.name }}
+    - name: Build and push ${{ matrix.mongo_version }}
       uses: docker/build-push-action@v4.1.1
       with:
         context: .
