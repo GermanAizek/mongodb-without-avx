@@ -51,7 +51,7 @@ jobs:
         context: .
         file: Dockerfile
         platforms: ${{ matrix.platforms }}
-        build-args: -|
+        build-args: |
           NUM_JOBS=2
           MONGO_VERSION=${{ matrix.mongo_version }}
         push: true
