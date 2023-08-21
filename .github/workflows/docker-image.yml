@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - mongo_version: 6.0.2
+          - mongo_version: 6.0.9
             platforms: |-
               linux/amd64
           - mongo_version: 5.0.20
@@ -37,6 +37,13 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+    - name: cleanup local FS before build
+      run: |
+        # Workaround to provide additional free space for testing.
+        #   https://github.com/actions/virtual-environments/issues/2840
+        sudo rm -rf /swapfile /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/share/boost
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
     - name: Build and push ${{ matrix.mongo_version }}
       uses: docker/build-push-action@v4.1.1
