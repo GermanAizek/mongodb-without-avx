@@ -1,9 +1,9 @@
-# Building Mongodb without avx
+# Building Mongodb 4.4 without avx
 
 Python Prerequisites
 ---------------
 
-In order to build MongoDB, Python 3.7+ is required, and several Python
+In order to build MongoDB 4.4, Python 3.7+ is required, and several Python
 modules must be installed. Python 3 is included in macOS 10.15 and later.
 For earlier macOS versions, Python 3 can be installed using Homebrew or
 MacPorts or similar.
